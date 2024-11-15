@@ -56,18 +56,16 @@ remove_repetitives([H|T], R) :-
 % UPDATE: am incercat prima varianta in care sa pastrez lista originala dar nu a mers asa ca am folosit a 2a varianta unde sterg toate aparitiile unui element care se repeta
 
 % b.
-find_maximum([], _, 0).
+% find_max(L-list, M-number, R-number)
+% find_max(i, i, o)
+% find_max((l1, ..., ln), m) =
+% { m, if n = 0
+% { max(l1, m) U find_max((l2, ..., ln), m), otherwise
 
-find_maximum([H|T], Maximum, H) :-
-	Maximum < H,
-	find_maximum(T, H, H).
+% Base case: When the list is empty, the current maximum is the result.
+find_max([], Max, Max).
 
-find_maximum([H|T], Maximum, R) :-
-	Maximum >= H,
-	find_maximum(T, Maximum, R).
-
-remove_maximum([], _, []).
-
-remove_maximum([H|T], Maximum, R) :-
-	find_maximum([H|T], 0, Maximum),
-	remove([H|T], Maximum, R).
+% Recursive case: Compare the head with the current maximum.
+find_max([H|T], CurrentMax, Result) :-
+    NewMax is max(H, CurrentMax),  % Update the current maximum
+    find_max(T, NewMax, Result).   % Recur with the new maximum.
