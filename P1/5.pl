@@ -24,3 +24,5 @@ set_union([HA|TA], [HB|TB], [HA|Rest]) :-
 set_union([HA|TA], [HB|TB], R) :-
 	apps([HB|TB], HA, 0),
 	set_union(TA, [HB|TB], R).
+
+% b.
